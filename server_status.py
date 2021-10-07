@@ -66,13 +66,13 @@ for index, region in regions_dict.items():
         server_name = server.find("div", class_="ags-ServerStatus-content-responses-response-server-name")
 
         if server.find_all("div", {"class": "ags-ServerStatus-content-responses-response-server-status ags-ServerStatus-content-responses-response-server-status--up"}):
-            server_status = "✅"
+            server_status = "Up"
         elif server.find_all("div", {"class": "ags-ServerStatus-content-responses-response-server-status ags-ServerStatus-content-responses-response-server-status--down"}):
-            server_status = "❌"
+            server_status = "Down"
         elif server.find_all("div", {"class": "ags-ServerStatus-content-responses-response-server-status ags-ServerStatus-content-responses-response-server-status--full"}):
-            server_status = "🔒"
+            server_status = "Full"
         elif server.find_all("div", {"class": "ags-ServerStatus-content-responses-response-server-status ags-ServerStatus-content-responses-response-server-status--maintenance"}):
-            server_status = "🔧"
+            server_status = "Maintenance"
         else:
             server_status = "💨"
 

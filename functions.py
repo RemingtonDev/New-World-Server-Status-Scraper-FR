@@ -4,22 +4,19 @@ from copy import deepcopy
 
 def discord_webhook(webhook_url, region, server, new_status, status_url,
                     message):
-    if new_status == "✅":
+    if new_status == "Up":
         status_color = "00cf00"
-    elif new_status == "❌":
+    elif new_status == "Down":
         status_color = "ff0000"
-    elif new_status == "🔒":
+    elif new_status == "Full":
         status_color = "FFA500"
-    elif new_status == "🔧":
+    elif new_status == "Maintenance":
         status_color = "696969"
     else:
         status_color = "ffaa00"
 
     webhook = DiscordWebhook(url=webhook_url, rate_limit_retry=True)
-    embed = DiscordEmbed(title="Statut des serveurs New World",
-                         description=message,
-                         color=status_color,
-                         url=status_url)
+    embed = DiscordEmbed(title="Statut des serveurs New World", description=message, color=status_color,url=status_url)
     embed.add_embed_field(name="Région", value=region)
     embed.add_embed_field(name="Serveur", value=server)
     embed.add_embed_field(name="Statut", value=new_status)
@@ -30,26 +27,26 @@ def discord_webhook(webhook_url, region, server, new_status, status_url,
 
 
 def switch(old_status, new_status, webhook_url, region, server, url):
-    if new_status == "✅":
-        if old_status == "🔒" or old_status == "❌" or old_status == "🔧":
+    if new_status == "Up":
+        if old_status != "Up":
             discord_webhook(webhook_url, region, server, new_status, url, "Le serveur suivant est à présent online:")
         elif old_status == "null":
             discord_webhook(
                 webhook_url, region, server, new_status, url, "Le serveur suivant vient d'apparaître dans la liste:")
-    elif new_status == "❌":
-        if old_status == "✅" or old_status == "🔒" or old_status == "🔧":
+    elif new_status == "Down":
+        if old_status != "Down":
             discord_webhook(webhook_url, region, server, new_status, url, "Le serveur suivant est à présent hors-ligne.")
         elif old_status == "null":
             discord_webhook(
                 webhook_url, region, server, new_status, url, "Le serveur suivant vient d'apparaître dans la liste:")
-    elif new_status == "🔧":
-        if old_status == "✅" or old_status == "🔒" or old_status == "❌":
+    elif new_status == "Maintenance":
+        if old_status != "Maintenance":
             discord_webhook(webhook_url, region, server, new_status, url, "Le serveur suivant est à présent en maintenance:")
         elif old_status == "null":
             discord_webhook(
                 webhook_url, region, server, new_status, url, "Le serveur suivant vient d'apparaître dans la liste:")
-    elif new_status == "🔒":
-        if old_status == "✅" or old_status == "❌" or old_status == "🔧":
+    elif new_status == "Full":
+        if old_status != "Full":
             discord_webhook(webhook_url, region, server, new_status, url, "Le serveur suivant est à présent plein:")
         elif old_status == "null":
             discord_webhook(
