@@ -30,28 +30,28 @@ def switch(old_status, new_status, webhook_url, region, server, url):
     if new_status == "Up":
         if old_status != "Up":
             discord_webhook(webhook_url, region, server, new_status, url, "Le serveur suivant est à présent online:")
-        elif old_status == "null":
+        elif old_status == "":
             discord_webhook(
                 webhook_url, region, server, new_status, url, "Le serveur suivant vient d'apparaître dans la liste:")
     elif new_status == "Down":
         if old_status != "Down":
             discord_webhook(webhook_url, region, server, new_status, url, "Le serveur suivant est à présent hors-ligne.")
-        elif old_status == "null":
+        elif old_status == "":
             discord_webhook(
                 webhook_url, region, server, new_status, url, "Le serveur suivant vient d'apparaître dans la liste:")
     elif new_status == "Maintenance":
         if old_status != "Maintenance":
             discord_webhook(webhook_url, region, server, new_status, url, "Le serveur suivant est à présent en maintenance:")
-        elif old_status == "null":
+        elif old_status == "":
             discord_webhook(
                 webhook_url, region, server, new_status, url, "Le serveur suivant vient d'apparaître dans la liste:")
     elif new_status == "Full":
         if old_status != "Full":
             discord_webhook(webhook_url, region, server, new_status, url, "Le serveur suivant est à présent plein:")
-        elif old_status == "null":
+        elif old_status == "":
             discord_webhook(
                 webhook_url, region, server, new_status, url, "Le serveur suivant vient d'apparaître dans la liste:")
-    elif new_status == "null":
+    elif new_status == "":
         discord_webhook(
             webhook_url, region, server, "💨", url, "Le serveur suivant vient de disparaître de la liste:")
 
